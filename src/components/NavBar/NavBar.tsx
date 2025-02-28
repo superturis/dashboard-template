@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
   AppBar,
@@ -58,7 +58,7 @@ const menuItems = [
   },
 ];
 
-const getIcon = (icons: JSX.Element[], isActive: boolean) =>
+const getIcon = (icons: React.ReactElement[], isActive: boolean) =>
   isActive ? icons[0] : icons[1];
 
 const NavBar = ({ window }: Props) => {
@@ -96,15 +96,8 @@ const NavBar = ({ window }: Props) => {
               <MenuIcon className="menu-icon" />
               <Typography>{i18n.t("navbar.menu")}</Typography>
             </IconButton>
-            <Button
-              component={Link}
-              to={"/"}
-              className="header-logo"
-            >
-              <img
-                alt="veridian-logo"
-                src={Logo}
-              />
+            <Button component={Link} to={"/"} className="header-logo">
+              <img alt="home-logo" src={Logo} />
             </Button>
           </Box>
           <Box
@@ -139,15 +132,12 @@ const NavBar = ({ window }: Props) => {
             sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}
           >
             <Button
+              className="header-logo"
               component={Link}
               to={"/"}
               disableRipple
             >
-              <img
-                className="header-logo"
-                alt="veridian-logo"
-                src={Logo}
-              />
+              <img alt="home-logo" src={Logo} />
             </Button>
             {menuItems.map((item) => (
               <MenuItem
@@ -180,10 +170,7 @@ const NavBar = ({ window }: Props) => {
               disableRipple
               className={location.pathname === "/notifications" ? "active" : ""}
             >
-              <Badge
-                badgeContent={0}
-                color="error"
-              >
+              <Badge badgeContent={0} color="error">
                 {location.pathname === "/notifications" ? (
                   <NotificationsFull />
                 ) : (
